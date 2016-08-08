@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Schema\Blueprint;
@@ -15,11 +16,10 @@ class CreateConsultancySchoolTable extends Migration
         Schema::create('consultancy_school', function (Blueprint $table) {
             $table->integer('consultancy_id')->unsigned()->index();
             $table->integer('school_id')->unsigned()->index();
-            $table->boolean('is_active');
             $table->timestamps();
 
             $table->foreign('consultancy_id')->references('id')->on('consultancies')->onDelete('cascade');
-            $table->foreign('school_id')->references('id')->on('consultancies')->onDelete('cascade');
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
 
             $table->primary(['consultancy_id', 'school_id']);
         });

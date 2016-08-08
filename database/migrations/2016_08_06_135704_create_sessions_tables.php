@@ -16,7 +16,7 @@ class CreateSessionsTables extends Migration
             $table->increments('id');
             $table->date('start_date');
             $table->date('end_date');
-            $table->boolean('is_archieved');
+            $table->boolean('is_archived');
 
             $table->timestamps();
         });

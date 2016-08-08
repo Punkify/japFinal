@@ -15,10 +15,8 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('school_id')->unsigned()->index();
-            $table->date('payment_date');
             $table->integer('amount_paid');
             $table->integer('amount_used');
-            $table->integer('amount_excess');
             $table->timestamps('');
 
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');

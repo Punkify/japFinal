@@ -15,7 +15,6 @@ class CreateMessageCategoriesTable extends Migration
         Schema::create('message_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('category');
-            $table->timestamps();
         });
     }
 

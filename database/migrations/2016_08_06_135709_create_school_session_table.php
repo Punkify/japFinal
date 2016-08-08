@@ -15,7 +15,6 @@ class CreateSchoolSessionTable extends Migration
         Schema::create('school_session', function (Blueprint $table) {
             $table->integer('school_id')->unsigned()->index();
             $table->integer('session_id')->unsigned()->index();
-            $table->boolean('is_subscribed');
             $table->timestamps();
 
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
