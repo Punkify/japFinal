@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSchoolStudentTable extends Migration
+class CreateSchoolSessionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,15 @@ class CreateSchoolStudentTable extends Migration
      */
     public function up()
     {
-        Schema::create('school_student', function (Blueprint $table) {
+        Schema::create('school_session', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('school_id')->unsigned()->index();
-            $table->integer('student_id')->unsigned()->index();
+            $table->integer('session_id')->unsigned()->index();
             $table->timestamps();
-            
+
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->primary(['school_id', 'student_id']);
+            $table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');
+            $table->unique(['school_id', 'session_id']);
         });
     }
 
@@ -30,6 +31,6 @@ class CreateSchoolStudentTable extends Migration
      */
     public function down()
     {
-        Schema::drop('school_student');
+        Schema::drop('school_session');
     }
 }

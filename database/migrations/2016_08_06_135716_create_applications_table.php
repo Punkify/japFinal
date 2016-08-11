@@ -15,15 +15,13 @@ class CreateApplicationsTable extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id')->unsigned()->index();
-            $table->integer('session_id')->unsigned()->index();
-            $table->integer('school_id')->unsigned()->index();
+            $table->integer('school_session_id')->unsigned()->index();
             $table->timestamps();
 
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->foreign('session_id')->references('session_id')->on('school_session')->onDelete('cascade');
-            $table->foreign('school_id')->references('school_id')->on('school_session')->onDelete('cascade');
-
-            $table->unique(['student_id', 'session_id', 'school_id']);
+            $table->foreign('school_session_id')->references('id')->on('school_session')->onDelete('cascade');
+            
+            $table->unique(['student_id', 'school_session_id']);
         });
     }
 
