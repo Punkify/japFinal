@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMessageCategoriesTable extends Migration
+class CreateSessionsTables extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,12 @@ class CreateMessageCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('message_categories', function (Blueprint $table) {
+        Schema::create('sessions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('category');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->boolean('is_archived');
+
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateMessageCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('message_categories');
+        Schema::drop('sessions');
     }
 }

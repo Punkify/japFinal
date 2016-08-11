@@ -1,9 +1,10 @@
+
 <?php
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaymentsTable extends Migration
+class CreateConsultancySchoolTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +13,15 @@ class CreatePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('consultancy_school', function (Blueprint $table) {
+            $table->integer('consultancy_id')->unsigned()->index();
             $table->integer('school_id')->unsigned()->index();
-            $table->date('payment_date');
-            $table->integer('amount_paid');
-            $table->integer('amount_used');
-            $table->integer('amount_excess');
-            $table->timestamps('');
+            $table->timestamps();
 
+            $table->foreign('consultancy_id')->references('id')->on('consultancies')->onDelete('cascade');
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
 
+            $table->primary(['consultancy_id', 'school_id']);
         });
     }
 
@@ -33,6 +32,6 @@ class CreatePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('payments');
+        Schema::drop('consultancy_school');
     }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSchoolSessionTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,15 @@ class CreateSchoolSessionTable extends Migration
      */
     public function up()
     {
-        Schema::create('school_session', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('school_id')->unsigned()->index();
-            $table->integer('session_id')->unsigned()->index();
-            $table->boolean('is_subscribed');
-            $table->timestamps();
+            $table->integer('amount_paid');
+            $table->integer('amount_used');
+            $table->timestamps('');
 
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
-            $table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');
-            $table->primary(['school_id', 'session_id']);
+
         });
     }
 
@@ -31,6 +31,6 @@ class CreateSchoolSessionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('school_session');
+        Schema::drop('payments');
     }
 }
